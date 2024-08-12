@@ -1,0 +1,76 @@
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 0 4px 0;
+}
+.game-title {
+    display: flex;
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 6px;
+}
+.t2-color {
+    color: #FCAF85;
+}
+.t0-color {
+    color: #F25BAC;
+}
+.t4-color {
+    color: #F06C94;
+}
+.t8-color {
+    color: #982DCB;
+}
+.score-wrap {
+    display: flex;
+}
+.score-box {
+    background-color: #1D1D29;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px;
+    margin: 0 8px 0 0;
+}
+.high-score-box {
+    margin: 0 0 0 0;
+}
+.score-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #8484a1;
+}
+.score-val {
+    font-size: 16px;
+}
+.box-wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: #1D1D29;
+    border-radius: 10px;
+    padding: 2px;
+}
+.box {
+    border-radius: 10px;
+    background-color: #2F3146;
+    width: 80px;
+    height: 80px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px;
+}
+.note-wrap {
+    margin-top: 5px;
+    display: inline-flex;
+}
+.note {
+    font-size: 12px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+.note-text {
+    font-size: 10px;
+}
