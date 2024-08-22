@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 50px 0 4px 0;
+    margin: 50px 0 0 0;
 }
 .game-title {
     display: flex;
@@ -42,6 +42,23 @@
 }
 .score-val {
     font-size: 16px;
+}
+.refresh-wrap {
+    display: flex;
+    justify-content: end;
+}
+.refresh-icon {
+    background-color: #1D1D29;
+    border-radius: 10px;
+    text-align: center;
+    padding: 6px 9px;
+    margin: 0 0 10px 0;
+    width: 22px;
+    cursor: pointer;
+}
+.forward {
+    margin: 0 6px 10px 0;
+    width: 22px;
 }
 .box-wrap {
     display: grid;
