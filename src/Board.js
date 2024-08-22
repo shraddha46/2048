@@ -44,9 +44,7 @@ function Board() {
         const handleKeyDownEvent = (e) => {
             switch (e.key) {
                 case 'ArrowLeft':
-                    console.log("in left move===",score)
                     setBoardTilesVal(prevVal => {
-                        console.log("score=========>",score)
                         setPreviousBoardTilesVal(prevVal);
                         return moveTiles(prevVal,'Left');
                     });
@@ -81,7 +79,7 @@ function Board() {
     }, []);
 
     useEffect(() => {
-        if(highScore <= score && score !== 0)
+        if(highScore <= score)
             setHighScore(score);
         if(score === 0)
             localStorage.setItem('2048PreviousScore',0);
@@ -105,8 +103,7 @@ function Board() {
     },[previousBoardTilesVal]);
 
     const moveTiles = (board,direction) => {
-        var countScore = score;
-        //console.log("before countScore",countScore, score);
+        var countScore = 0;
         var isMove = false;
         let newBoard = board.map(row => row.slice());
         let newVal = [];
@@ -123,9 +120,7 @@ function Board() {
             for(let i=0;i<findRow.length;i++){
                 if(findRow[i] === findRow[i+1]){
                     newRow.push(findRow[i] + findRow[i+1])
-                    console.log("countScore",countScore);
-                    console.log("move join score",findRow[i])
-                    countScore = countScore + findRow[i]
+                    countScore = findRow[i] + findRow[i+1]
                     i++;
                 } else {
                     newRow.push(findRow[i])
@@ -153,8 +148,6 @@ function Board() {
             transportArray = generateSingleRandomValue(transportArray);
 
         setScore(prevCountScore => {
-            
-            //console.log("score-==-",prevCountScore, prevCountScore + countScore)
             setPreviousScore(prevCountScore);
             return prevCountScore + countScore;
         });
@@ -181,14 +174,14 @@ function Board() {
     const onRefresh = () => {
         setScore(0);
         setBoardTilesVal(generateArrayWithTwoValues());
-        localStorage.setItem('2048Score',0);
-        localStorage.setItem('2048BoardTiles', JSON.stringify([]));
-        localStorage.setItem('2048PreviousBoardTiles', JSON.stringify([]));
+        setPreviousBoardTilesVal([]);
     }
 
     const onForward= () => {
-        setBoardTilesVal(previousBoardTilesVal);
-        setScore(previousScore);
+        if(score !== 0){
+            setBoardTilesVal(previousBoardTilesVal);
+            setScore(previousScore);
+        }
     }
 
     return (
