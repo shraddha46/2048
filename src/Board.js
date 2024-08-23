@@ -33,10 +33,10 @@ function Board() {
         randomIndex.forEach(index => arr[Math.floor(index / 4)][index % 4] = 2);
         return arr;
     }
-    
+
     const [boardTilesVal, setBoardTilesVal] = useState(JSON.parse(localStorage.getItem('2048BoardTiles')) || generateArrayWithTwoValues());
     const [previousBoardTilesVal, setPreviousBoardTilesVal] = useState(JSON.parse(localStorage.getItem('2048PreviousBoardTiles')) || []);
-    const [score,setScore] = useState(Number(localStorage.getItem('2048Score')) || 0);
+    const [score, setScore] = useState(Number(localStorage.getItem('2048Score')) || 0);
     const [previousScore, setPreviousScore] = useState(Number(localStorage.getItem('2048PreviousScore')) || 0);
     const [highScore, setHighScore] = useState(Number(localStorage.getItem('2048HighScore')) || 0);
 
@@ -46,25 +46,25 @@ function Board() {
                 case 'ArrowLeft':
                     setBoardTilesVal(prevVal => {
                         setPreviousBoardTilesVal(prevVal);
-                        return moveTiles(prevVal,'Left');
+                        return moveTiles(prevVal, 'Left');
                     });
                     break;
                 case 'ArrowUp':
                     setBoardTilesVal(prevVal => {
                         setPreviousBoardTilesVal(prevVal);
-                        return moveTiles(prevVal,'Up');
+                        return moveTiles(prevVal, 'Up');
                     });
                     break;
                 case 'ArrowRight':
                     setBoardTilesVal(prevVal => {
                         setPreviousBoardTilesVal(prevVal);
-                        return moveTiles(prevVal,'Right');
+                        return moveTiles(prevVal, 'Right');
                     });
                     break;
                 case 'ArrowDown':
                     setBoardTilesVal(prevVal => {
                         setPreviousBoardTilesVal(prevVal);
-                        return moveTiles(prevVal,'Down');
+                        return moveTiles(prevVal, 'Down');
                     });
                     break;
                 default:
@@ -79,36 +79,36 @@ function Board() {
     }, []);
 
     useEffect(() => {
-        if(highScore <= score)
+        if (highScore <= score)
             setHighScore(score);
-        if(score === 0)
-            localStorage.setItem('2048PreviousScore',0);
-        localStorage.setItem('2048Score',score);
+        if (score === 0)
+            localStorage.setItem('2048PreviousScore', 0);
+        localStorage.setItem('2048Score', score);
     }, [score]);
 
     useEffect(() => {
-        localStorage.setItem('2048PreviousScore',previousScore);
+        localStorage.setItem('2048PreviousScore', previousScore);
     }, [previousScore]);
 
     useEffect(() => {
         localStorage.setItem('2048HighScore', score);
-    },[highScore]);
+    }, [highScore]);
 
     useEffect(() => {
         localStorage.setItem('2048BoardTiles', JSON.stringify(boardTilesVal));
-    },[boardTilesVal]);
+    }, [boardTilesVal]);
 
     useEffect(() => {
         localStorage.setItem('2048PreviousBoardTiles', JSON.stringify(previousBoardTilesVal));
-    },[previousBoardTilesVal]);
+    }, [previousBoardTilesVal]);
 
-    const moveTiles = (board,direction) => {
+    const moveTiles = (board, direction) => {
         var countScore = 0;
         var isMove = false;
         let newBoard = board.map(row => row.slice());
         let newVal = [];
-        if(direction === 'Up' || direction === 'Down'){
-            for(let col=0;col<4;col++){
+        if (direction === 'Up' || direction === 'Down') {
+            for (let col = 0; col < 4; col++) {
                 newVal.push(newBoard.map(val => val[col]))
             }
         } else {
@@ -117,34 +117,34 @@ function Board() {
         newBoard = newVal.map(row => {
             let newRow = [];
             var findRow = row.filter(v => v !== null);
-            for(let i=0;i<findRow.length;i++){
-                if(findRow[i] === findRow[i+1]){
-                    newRow.push(findRow[i] + findRow[i+1])
-                    countScore = findRow[i] + findRow[i+1]
+            for (let i = 0; i < findRow.length; i++) {
+                if (findRow[i] === findRow[i + 1]) {
+                    newRow.push(findRow[i] + findRow[i + 1])
+                    countScore = findRow[i] + findRow[i + 1]
                     i++;
                 } else {
                     newRow.push(findRow[i])
                 }
             }
-            if(direction === 'Right' || direction === 'Down') {
+            if (direction === 'Right' || direction === 'Down') {
                 newRow = Array(row.length - newRow.length).fill(null).concat(newRow);
             } else {
                 newRow = newRow.concat(Array(row.length - newRow.length).fill(null));
             }
-            
-            if(newRow.toString() !==  row.toString() && !isMove)
+
+            if (newRow.toString() !== row.toString() && !isMove)
                 isMove = true
             return newRow;
         });
         let transportArray = [];
-        if(direction === 'Up' || direction === 'Down'){
-            for(let col=0;col<4;col++){
+        if (direction === 'Up' || direction === 'Down') {
+            for (let col = 0; col < 4; col++) {
                 transportArray.push(newBoard.map(val => val[col]))
             }
         } else {
             transportArray = newBoard;
         }
-        if(isMove)
+        if (isMove)
             transportArray = generateSingleRandomValue(transportArray);
 
         setScore(prevCountScore => {
@@ -157,7 +157,7 @@ function Board() {
         var randomIndex = null;
         while (randomIndex === null) {
             randomIndex = Math.floor(Math.random() * 16);
-            if(boardVal[Math.floor(randomIndex / 4)][randomIndex % 4] !== null){
+            if (boardVal[Math.floor(randomIndex / 4)][randomIndex % 4] !== null) {
                 randomIndex = null
             } else {
                 boardVal[Math.floor(randomIndex / 4)][randomIndex % 4] = 2
@@ -177,15 +177,15 @@ function Board() {
         setPreviousBoardTilesVal([]);
     }
 
-    const onForward= () => {
-        if(score !== 0){
+    const onForward = () => {
+        if (score !== 0) {
             setBoardTilesVal(previousBoardTilesVal);
             setScore(previousScore);
         }
     }
 
     return (
-        <div className='container'>
+        <div className='tablet-size-container'>
             <div className='board-header'>
                 <div className="game-title">
                     <div className='t2-color'>2</div>
@@ -205,8 +205,8 @@ function Board() {
                 </div>
             </div>
             <div className="refresh-wrap">
-                <img src={ArrowForward} alt="Forward" className='refresh-icon forward' onClick={onForward}/>
-                <img src={ArrowRepeat} alt="Refresh" className='refresh-icon' onClick={onRefresh}/>
+                <img src={ArrowForward} alt="Forward" className='refresh-icon forward' onClick={onForward} />
+                <img src={ArrowRepeat} alt="Refresh" className='refresh-icon' data-bs-toggle="modal" data-bs-target="#staticBackdrop" />
             </div>
             <div className='box-wrap'>
                 {
@@ -229,6 +229,19 @@ function Board() {
                     Use your <b>arrow keys</b> to move the tiles. <br />
                     When two tiles with the same number <br />
                     touch, they <b>merge into one!</b>
+                </div>
+            </div>
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content modal-refresh">
+                        <div className="modal-body confirm-msg">
+                            Are You Sure?
+                        </div>
+                        <div className="modal-footer footer-wrap">
+                            <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal" onClick={onRefresh}>Restart</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

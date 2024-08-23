@@ -1,3 +1,12 @@
+.tablet-size-container {
+    max-width: 768px;
+    margin: auto;
+}
+@media (max-width: 321px) {
+    .tablet-size-container {
+        padding: 10px;
+    }
+}
 .board-header {
     display: flex;
     justify-content: space-between;
@@ -53,12 +62,25 @@
     text-align: center;
     padding: 6px 9px;
     margin: 0 0 10px 0;
-    width: 22px;
+    width: 40px;
     cursor: pointer;
 }
 .forward {
     margin: 0 6px 10px 0;
-    width: 22px;
+    width: 40px;
+}
+.modal-refresh {
+    background-color: #2F3146;
+}
+.confirm-msg {
+    color: #a5abaf;
+    font-family: cursive;
+    font-size: 35px;
+    text-align: center;
+}
+.footer-wrap {
+    border: none;
+    justify-content: center;
 }
 .box-wrap {
     display: grid;
@@ -78,6 +100,12 @@
     align-items: center;
     justify-content: center;
     margin: 4px;
+}
+@media (max-width: 321px) {
+    .box {
+        width: 66px;
+        height: 66px;
+    }
 }
 .note-wrap {
     margin-top: 5px;
