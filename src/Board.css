@@ -1,6 +1,7 @@
 .tablet-size-container {
     max-width: 768px;
     margin: auto;
+    height: 100vh;
 }
 @media (max-width: 321px) {
     .tablet-size-container {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Board.css';
 import ArrowRepeat from './arrow-repeat.svg';
 import ArrowForward from './arrow-forward.svg';
+import { useSwipeable } from 'react-swipeable';
 
 function Board() {
     const colorForNumbers = [
@@ -77,6 +78,27 @@ function Board() {
             window.removeEventListener('keydown', handleKeyDownEvent);
         };
     }, []);
+
+    const swipeHandlers = useSwipeable({
+        onSwipedLeft: () => setBoardTilesVal(prevVal => {
+            setPreviousBoardTilesVal(prevVal);
+            return moveTiles(prevVal, 'Left');
+        }),
+        onSwipedRight: () => setBoardTilesVal(prevVal => {
+            setPreviousBoardTilesVal(prevVal);
+            return moveTiles(prevVal, 'Right');
+        }),
+        onSwipedUp: () => setBoardTilesVal(prevVal => {
+            setPreviousBoardTilesVal(prevVal);
+            return moveTiles(prevVal, 'Up');
+        }),
+        onSwipedDown: () => setBoardTilesVal(prevVal => {
+            setPreviousBoardTilesVal(prevVal);
+            return moveTiles(prevVal, 'Down');
+        }),
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true,
+    });
 
     useEffect(() => {
         if (highScore <= score)
@@ -185,7 +207,7 @@ function Board() {
     }
 
     return (
-        <div className='tablet-size-container'>
+        <div className='tablet-size-container' {...swipeHandlers}>
             <div className='board-header'>
                 <div className="game-title">
                     <div className='t2-color'>2</div>
