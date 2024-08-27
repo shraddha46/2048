@@ -139,6 +139,8 @@ function Board() {
         newBoard = newVal.map(row => {
             let newRow = [];
             var findRow = row.filter(v => v !== null);
+            if(direction === 'Right' || direction === 'Down')
+                findRow = findRow.reverse()
             for (let i = 0; i < findRow.length; i++) {
                 if (findRow[i] === findRow[i + 1]) {
                     newRow.push(findRow[i] + findRow[i + 1])
@@ -149,6 +151,7 @@ function Board() {
                 }
             }
             if (direction === 'Right' || direction === 'Down') {
+                newRow = newRow.reverse();
                 newRow = Array(row.length - newRow.length).fill(null).concat(newRow);
             } else {
                 newRow = newRow.concat(Array(row.length - newRow.length).fill(null));
