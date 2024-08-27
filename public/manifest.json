@@ -3,17 +3,17 @@
   "name": "2048 - Progressive Web Application",
   "icons": [
     {
-      "src": "2048-logo.png",
+      "src": "2048-black64.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "2048-logo.png",
+      "src": "2048-black192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "2048-logo.png",
+      "src": "2048-black512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
