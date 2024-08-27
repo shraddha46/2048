@@ -1,7 +1,12 @@
 .tablet-size-container {
     max-width: 768px;
     margin: auto;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
 }
 @media (max-width: 321px) {
     .tablet-size-container {
